@@ -22,12 +22,18 @@ export class MerchantService {
 
 //Service for POST Request
   create(createMerchantDto: CreateMerchantDto) {
-   return this.merchantRepository.save(createMerchantDto);
+   this.merchantRepository.save(createMerchantDto);
+   const successMessage:any = {
+    message: "Merchant's profile has been created succesfully",
+    createdAt: new Date(),
+    details: createMerchantDto
+   }
+   return successMessage;
   }
 
 
   //Service for GET Request
-  async findAll(): Promise<Merchant[]> {
+  async findAll(): Promise<Merchant[]>{
   return await this.merchantRepository.find();
   }
 
@@ -37,7 +43,11 @@ export class MerchantService {
     if(!merchant){
       throw new NotFoundException("could not find merchant's profile!")
     }
-    return merchant;
+    const successResponse:any = {
+      message: "Merchant's profile has been displayed succesfully",
+      details: merchant
+    }
+    return successResponse;
   }
 
   //Service for PUT Request
@@ -47,7 +57,12 @@ export class MerchantService {
       throw new Error("Merchant not found!");
     }
     Object.assign(merchant, updateMerchantDto);
-    return await this.merchantRepository.save(merchant);
+     await this.merchantRepository.save(merchant);
+     const successResponse:any = {
+      message: "Merchant's profile has been updated succesfully",
+      details: merchant
+     }
+     return successResponse;
   }
 
 
@@ -55,9 +70,10 @@ export class MerchantService {
  async remove(id: string) {
     const merchant = await this.merchantRepository.findOne({where: {id}});
     if(!merchant){
-      throw new NotFoundException("could not find merchant's profile!")
+    throw new NotFoundException("could not find merchant's profile!")
     }
     this.merchantRepository.delete(id);
-   return `profile with id ${id} has been deleted succesfully`;
+    const successResponse:any = {message: `profile with id ${id} has been deleted succesfully`}
+    return successResponse;
   }
 }
