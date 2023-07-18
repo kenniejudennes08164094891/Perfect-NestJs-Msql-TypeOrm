@@ -9,8 +9,7 @@ import { Merchant } from './entities/merchant.entity';
 
 @Module({
   imports: [
-      TypeOrmModule.forFeature([Merchant]),
-     // SequelizeModule.forFeature([MerchantModel])
+      TypeOrmModule.forFeature([Merchant])
   ],
   controllers: [MerchantController],
   providers: [MerchantService]

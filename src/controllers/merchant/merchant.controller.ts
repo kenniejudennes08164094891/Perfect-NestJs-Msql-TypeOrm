@@ -31,15 +31,10 @@ export class MerchantController {
     return this.merchantService.findOne(merchantId);
   }
 
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateMerchantDto: UpdateMerchantDto) {
-    return this.merchantService.update(+id, updateMerchantDto);
+  @Put(':id')
+   update(@Param('id') id:number, @Body() updateMerchantData:UpdateMerchantDto){
+    return this.merchantService.update(id, updateMerchantData);
   }
-
-  // @Put(':id')
-  // async replacePost(@Param('id') id:any, @Body() post:UpdateMerchantDto){
-  //   return this.merchantService.replacePost(Number(id), post);
-  // }
 
   @Delete(':id')
   remove(@Param('id') id: string) {

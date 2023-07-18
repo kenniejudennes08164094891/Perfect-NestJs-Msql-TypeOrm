@@ -1,7 +1,6 @@
 /* eslint-disable prettier/prettier */
-import {ArrayMinSize, IsArray, IsBoolean, IsEmail, IsNotEmpty, IsNumber, IsObject, IsOptional, isString, IsString} from 'class-validator';
-import {Entity, Column, PrimaryGeneratedColumn, BaseEntity, Unique, PrimaryColumn} from 'typeorm';
-import {Res} from "@nestjs/common";
+import { IsEmail, IsNotEmpty, IsString} from 'class-validator';
+import {Entity, Column, PrimaryGeneratedColumn, BaseEntity} from 'typeorm';
 
 
 @Entity('merchant',{synchronize: true})
