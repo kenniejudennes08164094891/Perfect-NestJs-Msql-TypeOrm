@@ -15,4 +15,7 @@ export class CreateMerchantDto{
      @IsString() @IsNotEmpty()
     public merchantCharge: string;
 
+    @IsString() @IsNotEmpty()
+    public status = "Pending";
+
 }

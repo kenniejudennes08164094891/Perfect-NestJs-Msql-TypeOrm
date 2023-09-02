@@ -9,9 +9,11 @@ import {Merchant} from "./entities/merchant.entity";
 
 
 
+
 @Injectable()
 export class MerchantService {
   private readonly merchant: CreateMerchantDto | any = [];
+  private merchants: Merchant[] | any = [];
   private logger: Logger;
   constructor(
       @InjectRepository(Merchant)
@@ -50,6 +52,21 @@ export class MerchantService {
     return successResponse;
   }
 
+  //Service for PATCH Request
+ async patchMerchant(id: any, updateMerchantDto: UpdateMerchantDto): Promise<CreateMerchantDto>{
+  const merchant = await this.merchantRepository.findOne({where: {id}});
+  if(!merchant){
+    throw new Error("Merchant not found!");
+  }
+  Object.assign(merchant, updateMerchantDto);
+  await this.merchantRepository.save(merchant);
+  const successResponse:any = {
+    message: "Merchant's profile has been updated succesfully",
+    details: merchant
+   }
+   return successResponse;
+  }
+
   //Service for PUT Request
   async update(id: any, updateMerchantDto: UpdateMerchantDto): Promise<CreateMerchantDto> {
     const merchant = await this.merchantRepository.findOne({where: {id}});
@@ -57,6 +74,7 @@ export class MerchantService {
       throw new Error("Merchant not found!");
     }
     Object.assign(merchant, updateMerchantDto);
+    // this.logger.log("update merchant DTO>>", updateMerchantDto);
      await this.merchantRepository.save(merchant);
      const successResponse:any = {
       message: "Merchant's profile has been updated succesfully",
@@ -64,6 +82,7 @@ export class MerchantService {
      }
      return successResponse;
   }
+
 
 
   //Service for Delete Request

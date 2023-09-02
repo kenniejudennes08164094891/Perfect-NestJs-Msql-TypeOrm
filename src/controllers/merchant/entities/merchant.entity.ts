@@ -21,4 +21,7 @@ export class Merchant extends  BaseEntity{
     @Column({name: 'merchantCharge', nullable: false, default: ''}) @IsString() @IsNotEmpty()
     public merchantCharge: string;
 
+    @Column({name: 'status', nullable: false, default: ''}) @IsString() @IsNotEmpty()
+    public status: string;
+
 }
