@@ -9,7 +9,7 @@ export class Merchant extends  BaseEntity{
     @PrimaryGeneratedColumn({type: 'bigint', name: 'user_id'})
     public id: string;
 
-    @Column({name: 'merchantId', nullable: false, default: ''}) @IsString() @IsNotEmpty()
+    @Column({name: 'merchantId', nullable: false, default: ''}) @IsString() @IsNotEmpty() @IsNotEmpty({message: "merchantID is a required field"})
     public merchantId: string;
 
     @Column({name:'merchantEmail', nullable: false, default: ''}) @IsString() @IsEmail() @IsNotEmpty({message: "merchantEmail is a required field"})
