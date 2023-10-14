@@ -16,7 +16,8 @@ import { UpdateMerchantDto, UpdateToggleStatus } from './dto/update-merchant.dto
 import { ApiTags, ApiResponse, ApiOperation, ApiQuery } from '@nestjs/swagger';    // For swagger API documentations
 import {Logger} from "@nestjs/common";
 
-@ApiTags('Created by kennie-judennes')
+
+@ApiTags('Merchant Controller')
 @Controller('merchant')
 export class MerchantController {
 
@@ -85,7 +86,7 @@ export class MerchantController {
   @ApiResponse({ status: 403, description: 'Forbidden' })
   @ApiResponse({ status: 500, description: 'Internal Server Error' })
   @ApiResponse({ status: 401, description: 'UnAuthorized' })
-  @ApiOperation({ summary: "Toggle Merchant's Status", description: "Status Enums:  active || pending || rejected"})   //StatusValidationPipe
+  @ApiOperation({ summary: "Toggle Merchant's Status", description: "Status Types:  active || pending || rejected"})   //StatusValidationPipe
   async toggleStatus(@Param('id') id:number, @Body() updateMerchantData:UpdateToggleStatus){
     return this.merchantService.toggleMerchantStatus(id, updateMerchantData);
   }

@@ -1,6 +1,6 @@
 /* eslint-disable prettier/prettier */
-import { IsEmail, IsNotEmpty, IsString} from 'class-validator';
-import {Entity, Column, PrimaryGeneratedColumn, BaseEntity} from 'typeorm';
+import { IsEmail, IsNotEmpty, IsString} from 'class-validator';    //npm i @nestjs/class-validator
+import {Entity, Column, PrimaryGeneratedColumn, BaseEntity} from 'typeorm'; //npm i @nestjs/typeorm  //npm install --save @nestjs/typeorm typeorm mysql2   depending on the database to be used
 
 
 @Entity('merchant',{synchronize: true})

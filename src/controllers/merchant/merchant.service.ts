@@ -64,8 +64,7 @@ export class MerchantService {
         limit: parseInt(limit)
       }
     };
-    return paginationResponse
-    // return await this.merchantRepository.find();
+    return paginationResponse;
   }
 
 

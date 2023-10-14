@@ -5,9 +5,6 @@ import { CreateMerchantDto, ToggleStatus } from './create-merchant.dto';
 import { IsEmail, IsNotEmpty, IsString} from 'class-validator';
 
 
-
-
-
 export class UpdateMerchantDto extends PartialType(CreateMerchantDto) {
 
    @IsString() @IsNotEmpty() @IsNotEmpty({message: "merchantID is a required field"})
