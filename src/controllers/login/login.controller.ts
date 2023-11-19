@@ -3,14 +3,13 @@ import { Controller, Post, Body, UseGuards , Request, Logger, Get, Res} from '@n
 import { LoginService } from './login.service';
 import { CreateLoginDto } from './dto/create-login.dto';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
-import { JwtService } from '@nestjs/jwt';
 
 @ApiTags('Login Controller')
 @Controller('login')
 export class LoginController {
 
   private logger: Logger;
-  constructor(private readonly loginService: LoginService, private readonly jwt: JwtService) {
+  constructor(private readonly loginService: LoginService) {
     this.logger = new Logger(LoginController.name);
   }
 
@@ -22,12 +21,10 @@ export class LoginController {
   @ApiResponse({ status: 500, description: 'Internal Server Error' })
   @ApiResponse({ status: 401, description: 'UnAuthorized' })
   @ApiOperation({ summary: "Authenticate Merchant" })
-  async create(@Res() @Body() @Request() createLoginDto: CreateLoginDto) {
+  async create(@Body()createLoginDto: CreateLoginDto) {
     // this.logger.log("login payloadXYZ>>", createLoginDto);
-    const token = await this.loginService.login(createLoginDto, this.jwt)
-    this.logger.log("login token>>", token);
-    this.logger.log("login jwt>>", this.jwt);
-    return token//this.loginService.login(createLoginDto, token);
+    const token = await this.loginService.login(createLoginDto, createLoginDto.email)
+    return token
   }
 
 

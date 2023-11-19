@@ -10,7 +10,6 @@ import { CreateLoginDto } from './controllers/login/dto/create-login.dto';
 
 
 
-
 @Module({
   imports: [
       MerchantModule,
@@ -21,11 +20,11 @@ import { CreateLoginDto } from './controllers/login/dto/create-login.dto';
       port: 3306,
       username: 'root',
       password: 'J.j@2015',
-      database: 'test',
+      database: 'test',  //schema name
       entities: [CreateMerchantDto, CreateLoginDto], //entities,
       synchronize: true,
       autoLoadEntities: true,
-    }),
+    })
     
   ],
   controllers: [AppController],

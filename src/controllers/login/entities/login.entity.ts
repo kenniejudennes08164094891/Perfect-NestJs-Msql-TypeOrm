@@ -1,6 +1,6 @@
 /* eslint-disable prettier/prettier */
 import { IsEmail, IsNotEmpty, IsString} from 'class-validator';    //npm i @nestjs/class-validator
-import {Entity, Column, PrimaryGeneratedColumn, BaseEntity} from 'typeorm'; //npm i @nestjs/typeorm  //npm install --save @nestjs/typeorm typeorm mysql2   depending on the database to be used
+import {Entity, Column, PrimaryGeneratedColumn, BaseEntity, CreateDateColumn} from 'typeorm'; //npm i @nestjs/typeorm  //npm install --save @nestjs/typeorm typeorm mysql2   depending on the database to be used
 
 
 @Entity('merchant-login',{synchronize: true})
@@ -16,10 +16,10 @@ export class Login extends BaseEntity {
     public password: string;
 
     
-    @Column({name: 'createdAt', nullable: false, default: ''}) @IsString() @IsNotEmpty()
+    @Column({name:'createdAt', nullable: false, default: ''}) @IsString()  @IsNotEmpty()
     public createdAt: string;
 
-    @Column({name: 'updatedAt', nullable: false, default: ''}) @IsString() @IsNotEmpty()
-    public updatedAt: string;
+    // @Column({name:'updatedAt', nullable: false, default: ''}) @IsString()  @IsNotEmpty()
+    // public updatedAt: string;
 
 }

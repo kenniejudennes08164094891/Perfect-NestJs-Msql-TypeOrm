@@ -23,6 +23,7 @@ async function bootstrap() {
   .setDescription('API documentation for merchant use')
   .setVersion('1.0')
   .addTag('Created by Kennie-Judennes')
+  .addBearerAuth() // This enables the Bearer token input
   .build();
 
   const document = SwaggerModule.createDocument(app, config)
@@ -32,6 +33,7 @@ async function bootstrap() {
   // browse http://localhost:3000/api-docs#/   or   http://localhost:3000/api-docs
 
   await app.listen(3000); 
+  app.enableCors()   //to enable cors on the application
   //process.env.PORT || 3000
 }
 bootstrap();

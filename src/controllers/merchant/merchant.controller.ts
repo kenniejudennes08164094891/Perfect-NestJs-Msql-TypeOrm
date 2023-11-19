@@ -9,16 +9,19 @@ import {
   Query,
   Delete, 
   Put,
-  ValidationPipe} from '@nestjs/common';
+  ValidationPipe,
+  UseGuards} from '@nestjs/common';
 import { MerchantService } from './merchant.service';
 import { CreateMerchantDto, PaginateDTO } from './dto/create-merchant.dto';
 import { UpdateMerchantDto, UpdateToggleStatus } from './dto/update-merchant.dto';
-import { ApiTags, ApiResponse, ApiOperation, ApiQuery } from '@nestjs/swagger';    // For swagger API documentations
+import { ApiTags, ApiResponse, ApiOperation, ApiQuery, ApiBearerAuth } from '@nestjs/swagger';    // For swagger API documentations
 import {Logger} from "@nestjs/common";
+import { JwtGuard } from '../login/jwt.strategy/jwt.auth.guard/jwt.guard';   // imported from login module...used to authenticate other API's 
 
 
 @ApiTags('Merchant Controller')
 @Controller('merchant')
+@ApiBearerAuth()    // Use this decorator to specify Bearer token authentication
 export class MerchantController {
 
   private logger: Logger;
@@ -28,6 +31,7 @@ export class MerchantController {
  
 
   @Post('create-merchant')
+  @UseGuards(JwtGuard)
   @ApiResponse({ status: 201, description: 'Success' })
   @ApiResponse({ status: 404, description: 'Not Found' })
   @ApiResponse({ status: 400, description: 'Bad Request' })
@@ -40,6 +44,7 @@ export class MerchantController {
   }
 
   @Get('fetch-merchants')
+  @UseGuards(JwtGuard)
   @ApiResponse({ status: 200, description: 'Success' })
   @ApiResponse({ status: 404, description: 'Not Found' })
   @ApiResponse({ status: 403, description: 'Forbidden' })
@@ -55,6 +60,7 @@ export class MerchantController {
   }
 
   @Get('get-single-merchant/:id')
+  @UseGuards(JwtGuard)
   @ApiResponse({ status: 200, description: 'Success' })
   @ApiResponse({ status: 404, description: 'Not Found' })
   @ApiResponse({ status: 400, description: 'Bad Request' })
@@ -68,6 +74,7 @@ export class MerchantController {
   }
 
   @Patch('patch-merchant/:id')
+  @UseGuards(JwtGuard)
   @ApiResponse({ status: 201, description: 'Success' })
   @ApiResponse({ status: 404, description: 'Not Found' })
   @ApiResponse({ status: 400, description: 'Bad Request' })
@@ -80,6 +87,7 @@ export class MerchantController {
   }
 
   @Patch('toggle-merchant-status/:id')
+  @UseGuards(JwtGuard)
   @ApiResponse({ status: 201, description: 'Success' })
   @ApiResponse({ status: 404, description: 'Not Found' })
   @ApiResponse({ status: 400, description: 'Bad Request' })
@@ -92,6 +100,7 @@ export class MerchantController {
   }
 
   @Put('update-merchant/:id')
+  @UseGuards(JwtGuard)
   @ApiResponse({ status: 201, description: 'Success' })
   @ApiResponse({ status: 404, description: 'Not Found' })
   @ApiResponse({ status: 400, description: 'Bad Request' })
@@ -104,6 +113,7 @@ export class MerchantController {
   }
 
   @Delete('delete-merchant/:id')
+  @UseGuards(JwtGuard)
   @ApiResponse({ status: 201, description: 'Success' })
   @ApiResponse({ status: 404, description: 'Not Found' })
   @ApiResponse({ status: 400, description: 'Bad Request' })

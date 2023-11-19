@@ -105,18 +105,47 @@ export class MerchantService {
       throw new HttpException('invalid status type', HttpStatus.BAD_REQUEST);
     }
 
+    //To check if merchant exists, before updating merchant
     const merchant = await this.merchantRepository.findOne({ where: { id } });
     if (!merchant) {
       throw new Error("Merchant not found!");
     }
 
+    //To check if status already exists, instead of updating same status
+    // const existingStatus = await this.merchantRepository.findOne({ where: { status: updateMerchantDto?.status } });
+    // if(existingStatus){
+    //   throw new HttpException(`Merchant is already ${filterValidStatus[0]}!`, HttpStatus.BAD_REQUEST);
+    // }
+
+   if(filterValidStatus[0] === "active"){
     Object.assign(merchant, updateMerchantDto);
     await this.merchantRepository.save(merchant);
     const successResponse: any = {
-      message: "Merchant's status has been updated successfully",
+      message: "Merchant's status has been activated successfully",
       details: merchant
     }
     return successResponse;
+
+   }else if (filterValidStatus[0] === "disabled"){
+    Object.assign(merchant, updateMerchantDto);
+    await this.merchantRepository.save(merchant);
+    const successResponse: any = {
+      message: "Merchant's status has been disabled successfully",
+      details: merchant
+    }
+    return successResponse;
+
+   }else{
+    Object.assign(merchant, updateMerchantDto);
+    await this.merchantRepository.save(merchant);
+    const successResponse: any = {
+      message: "Merchant's status has been updated successfully to default",
+      details: merchant
+    }
+    return successResponse;
+   }
+
+
   }
 
   //Service for PUT Request

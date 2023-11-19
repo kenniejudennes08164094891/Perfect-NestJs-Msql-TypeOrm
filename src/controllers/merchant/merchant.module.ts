@@ -4,6 +4,7 @@ import { MerchantService } from './merchant.service';
 import { MerchantController } from './merchant.controller';
 import {TypeOrmModule} from "@nestjs/typeorm";
 import { Merchant } from './entities/merchant.entity';
+import { JwtService } from '@nestjs/jwt';  // for authenticating all API's
 
 
 @Module({
@@ -11,6 +12,6 @@ import { Merchant } from './entities/merchant.entity';
       TypeOrmModule.forFeature([Merchant])
   ],
   controllers: [MerchantController],
-  providers: [ MerchantService]
+  providers: [ MerchantService, JwtService]
 })
 export class MerchantModule {}
